@@ -1,0 +1,35 @@
+load("@io_bazel_rules_scala//scala:scala.bzl", "scala_binary", "scala_library")
+
+
+scala_library(
+    name = "generatorz",
+    srcs = ["@kara//:sources", "KaraWrapper.scala"],
+
+    unused_dependency_checker_mode = "error",
+    deps = [
+        "@maven//:commons_io_commons_io",
+        "@maven//:io_circe_circe_yaml_2_13",
+        "@maven//:org_scalatra_scalate_scalate_core_2_13",
+        "@maven//:org_scalatra_scalate_scalate_util_2_13",
+        "@maven//:org_typelevel_cats_kernel_2_13",
+        "@maven//:org_scala_sbt_util_logging_2_13",
+        "@maven//:com_twitter_scrooge_generator_2_13",
+        "@maven//:org_typelevel_cats_core_2_13",
+        "@maven//:io_circe_circe_core_2_13",
+        "@maven//:org_scala_sbt_util_interface",
+        "@maven//:org_scala_lang_modules_scala_parser_combinators_2_13",
+    ],
+)
+
+scala_binary(
+    name = "wrapper",
+    resources = ["@kara//:resources"],
+    main_class = "com.ea.rules_kara.KaraWrapper",
+    deps = [
+        ":generatorz",
+        "@maven//:org_scala_sbt_util_logging_2_13",
+        "@maven//:org_scala_sbt_util_interface",
+
+    ],
+    visibility = ["//visibility:public"],
+)

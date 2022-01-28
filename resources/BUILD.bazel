@@ -1,0 +1,8 @@
+
+filegroup(
+    name = "resources",
+    srcs = glob([
+        "index.html",
+    ]),
+    visibility = ["//visibility:public"],
+)
